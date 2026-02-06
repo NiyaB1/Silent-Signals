@@ -1,3 +1,6 @@
+## License
+This project is licensed under the MIT License.
+
 # Silent-Signals
 AI System to Detect Early Burnout &amp; Stress Using Everyday Keyboard &amp; Mouse Behavior
 
