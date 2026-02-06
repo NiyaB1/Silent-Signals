@@ -18,6 +18,14 @@ def on_key_release(key):
 def on_move(x, y):
     mouse_events.append((time.time(), "mouse_move"))
 
+def on_click(x, y, button, pressed):
+    if pressed:
+        mouse_events.append((time.time(), "mouse_click"))
+
+def on_scroll(x, y, dx, dy):
+    direction = "scroll_up" if dy > 0 else "scroll_down"
+    mouse_events.append((time.time(), direction))
+
 def save_events():
     os.makedirs("data", exist_ok=True)
     file_exists = os.path.isfile(OUTPUT_FILE)
@@ -45,7 +53,9 @@ def main():
         on_release=on_key_release
     )
     mouse_listener = mouse.Listener(
-        on_move=on_move
+        on_move=on_move,
+        on_click=on_click,
+        on_scroll=on_scroll
     )
 
     keyboard_listener.start()
