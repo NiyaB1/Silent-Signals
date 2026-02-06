@@ -51,5 +51,15 @@ It serves as a foundation for further research in **privacy-preserving behaviora
 
 ---
 
+## ▶️ Running the Logger
+
+Ensure you are in the **project root directory** before running the logger.
+
+```bash
+cd Silent-Signals
+python src/logger.py
+```
+---
+
 ## 📜 License
 This project is licensed under the **MIT License**.
