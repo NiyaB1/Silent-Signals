@@ -3,6 +3,7 @@ import csv
 import os
 from pynput import keyboard, mouse
 from datetime import datetime
+import uuid
 
 OUTPUT_FILE = "data/interaction_log.csv"
 
@@ -29,19 +30,22 @@ def on_scroll(x, y, dx, dy):
 def save_events():
     os.makedirs("data", exist_ok=True)
     file_exists = os.path.isfile(OUTPUT_FILE)
+    
+    # Generate unique session ID for this run
+    session_id = str(uuid.uuid4())[:8]  # Use first 8 chars for readability
 
     with open(OUTPUT_FILE, "a", newline="") as f:
         writer = csv.writer(f)
         if not file_exists:
-            writer.writerow(["timestamp", "event", "source"])
+            writer.writerow(["timestamp", "event", "source", "session_id"])
 
         for t, e in keyboard_events:
-            writer.writerow([t, e, "keyboard"])
+            writer.writerow([t, e, "keyboard", session_id])
 
         for t, e in mouse_events:
-            writer.writerow([t, e, "mouse"])
+            writer.writerow([t, e, "mouse", session_id])
 
-    print("Events saved.")
+    print(f"Events saved with session_id: {session_id}")
 
 def main():
     start_time = datetime.now()
